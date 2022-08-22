@@ -10,12 +10,12 @@ jobs:
   test:
     name: Py ${{ matrix.python }} / Django ${{ matrix.django }}
     env:
-      DJANGO_SETTINGS_MODULE: core.dev
+      DJANGO_SETTINGS_MODULE: config.settings.test
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
       matrix:
-        python: [3.8, 3.9]
+        python: [3.9]
         django: [4.1]
     steps:
     - uses: actions/checkout@v2
@@ -30,4 +30,4 @@ jobs:
         pip install --upgrade Django==${{ matrix.django }}
     - name: Run Tests
       run: |
-        python manage.py test -v2
+        python runtests.py
