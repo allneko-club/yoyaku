@@ -1,0 +1,52 @@
+{% extends 'layouts/base.html' %} {% block title %} メール送信確認 {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        {% if is_test %}
+        <h4 class="card-title">テストメール送信確認</h4>
+        {% else %}
+        <h4 class="card-title">メール送信確認</h4>
+        {% endif %}
+        <p class="h5">以下の内容で送信します。</p>
+      </div>
+        <form id="mail_submit" action="{% url 'mail:メール送信' %}">
+
+        {% csrf_token %} 
+        <div class="card-body">
+          {% include 'mail/confirm_body.html' %}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script type="text/javascript">
+$(function () {
+    $('#send_button').click(function () {
+        $("#send_button").prop("disabled", true);
+        url = $("#mail_submit").attr("action");
+        // Ajax通信を開始する
+        $.ajax({
+            type: "POST",
+            url: url,
+            data : $("#mail_submit").serialize(),
+            dataType: "json",
+        }).done(function(data){
+            blackDashboard.showSidebarMessage(data.msg);
+            $("#send_button").prop("disabled", false);
+        }).fail(function(XMLHttpRequest, status, e){
+            alert(e);
+            $("#send_button").prop("disabled", false);
+        });
+    });
+});
+</script>{% endblock javascripts %}

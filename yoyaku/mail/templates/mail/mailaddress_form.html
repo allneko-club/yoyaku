@@ -1,0 +1,49 @@
+{% extends 'layouts/base.html' %} {% block title %} {{segment}}編集 {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">{{segment}}編集</h4>
+        <h6 class="card-category">
+          <p class="h5">以下の項目を入力してください。</p>
+          {% for msg in form.non_field_errors %}
+            <span class="text-danger">{{ msg }}</span>
+          {% endfor %}
+        </h6>
+      </div>
+      <form role="form" method="post" action="">
+        {% csrf_token %} 
+        <div class="card-body">
+          <div class="form-group col-md-12">
+            <label for="user_id">メールアドレス*</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+              {% for error in form.email.errors %}
+                <p class="text-danger">{{ error|escape }}</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+          <div class="form-group col-md-12">
+            <label for="user_id">メモ（最大{{ form.memo.field.max_length }}文字）</label>
+            {{ form.memo }}
+            {% if form.memo.errors %}
+              {% for error in form.memo.errors %}
+                <p class="text-danger">{{ error|escape }}</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+          <button type="submit" class="btn btn-primary">保存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,212 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} 顧客詳細 {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+{% load tag_utils %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">{{segment}}詳細</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table tablesorter" id="">
+            <thead class="text-primary">
+              <tr>
+                <th>ID</th>
+                <th>名前</th>
+                <th>フリガナ</th>
+                <th>LINE名</th>
+                <th>TEL</th>
+                <th>メール</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ object.id }}</td>
+                <td>{{ object.username }}</td>
+                <td>{{ object.furigana|default_if_none:"" }}</td>
+                <td>{{ object.linename|default_if_none:"" }}</td>
+                <td>{{ object.phone_number|default_if_none:"" }}</td>
+                <td>{{ object.email|default_if_none:"" }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-responsive">
+          <table class="table tablesorter" id="">
+            <thead class="text-primary">
+              <tr>
+                <th style="width:10%">年齢</th>
+                <th style="width:10%">年代</th>
+                <th style="width:30%">職業</th>
+                <th>副業経験</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ object.age|default_if_none:"" }}</td>
+                <td>{{ object.ages|default_if_none:"" }}</td>
+                <td>{{ object.job|default_if_none:"" }}</td>
+                <td>{{ object.side_business_experience|default_if_none:"" }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-responsive">
+          <table class="table tablesorter" id="">
+            <thead class="text-primary">
+              <tr>
+                <th style="width:20%">郵便番号</th>
+                <th>住所</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ object.zip_code|default_if_none:"" }}</td>
+                <td>{{ object.zip|default_if_none:"" }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-responsive">
+          <table class="table tablesorter" id="">
+            <thead class="text-primary">
+              <tr>
+                <th style="width:20%">登録日時</th>
+                <th>経過日数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ object.date_joined }}</td>
+                <td>{{ object.date_joined|days_since }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <label>作業可能時間</label>
+              <p class="card-text">{{ object.workable_time|default_if_none:"" }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <label>お問い合わせ</label>
+              <p class="card-text">{{ object.contact|default_if_none:"" }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <label>メモ1</label>
+              <p class="card-text">{{ object.memo1|default_if_none:"" }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <label>メモ2</label>
+              <p class="card-text">{{ object.memo2|default_if_none:"" }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-fill btn-primary" href="{% url 'accounts:顧客編集' object.id %}">編集</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">予約状況</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table tablesorter" id="">
+            <thead class="text-primary">
+              <tr>
+                <th>予約日時</th>
+                <th>スタッフ</th>
+                <th class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if object.booking %}
+              <tr>
+                <td>{{ object.booking.get_start_datetime }}</td>
+                {% if object.booking.get_staff_name != '未定義' %}
+                  <td>{{ object.booking.get_staff_name }}</td>
+                {% else %}
+                  <td><span class="badge badge-danger">未定義</span></td>
+                {% endif %}
+                <td class="td-actions text-right">
+                  <a class="btn btn-success btn-sm btn-icon" href="{% url 'booking:予約変更_顧客詳細' object.booking.id %}">
+                      <i class="tim-icons icon-settings"></i>
+                  </a>
+                  <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-icon" data-toggle="modal" data-target="#exampleModal" data-url="{% url 'booking:予約削除' object.booking.id %}">
+                      <i class="tim-icons icon-simple-remove"></i>
+                  </button>
+                </td>
+              </tr>
+              {% else%}
+              <tr>
+                <td>予約なし</td>
+                <td></td>
+                <td class="td-actions text-right">
+                  <a class="btn btn-success btn-sm btn-icon" href="{% url 'booking:予約登録' object.id %}">
+                      <i class="tim-icons icon-settings"></i>
+                  </a>
+                </td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {% if object.booking %}
+      <div class="card-footer">
+        <a class="btn btn-fill btn-primary" href="{% url 'mail:メール編集' 2 object.booking.id %}">予約日時通知メール送信</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<!-- Delete Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">予約削除確認</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="tim-icons icon-simple-remove"></i>
+        </button>
+      </div>
+      <form role="form" id="form1" action="" method="POST">
+        {% csrf_token %}
+        <div class="modal-body">
+          指定した予約を削除します。よろしいですか？
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <button type="submit" class="btn btn-primary" id="delete">削除</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

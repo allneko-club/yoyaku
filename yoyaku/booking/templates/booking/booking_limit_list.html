@@ -1,0 +1,314 @@
+{% extends 'layouts/base.html' %} {% block title %} {{segment}}登録 {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+{% load booking_tags %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">{{segment}}登録</h4>
+      </div>
+      <div class="card-body">
+        {% for msg in form.non_field_errors %}
+          <p class="text-danger">{{ msg }}</p>
+        {% endfor %}
+        <form role="form" method="post" action="{% url 'booking:予約枠一覧' %}">
+          {% csrf_token %}
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="start_date">{{ form.start_datetime.label }}</label>
+              {{ form.start_datetime }}
+              {% if form.start_datetime.errors %}
+                {% for error in form.start_datetime.errors %}
+                  <p class="text-danger">{{ error|escape }}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+            <div class="form-group col-md-6">
+              <label for="{{ form.end_datetime.id_for_label }}">{{ form.end_datetime.label }}</label>
+              {{ form.end_datetime }}
+              {% if form.end_datetime.errors %}
+                {% for error in form.end_datetime.errors %}
+                  <p class="text-danger">{{ error|escape }}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="col-sm-4 col-form-label">時間帯</label>
+              <div class="col-sm-12">
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time_all }}
+                    {{ form.time_all.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time0900 }}
+                    {{ form.time0900.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time0930 }}
+                    {{ form.time0930.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1000 }}
+                    {{ form.time1000.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1030 }}
+                    {{ form.time1030.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1100 }}
+                    {{ form.time1100.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1130 }}
+                    {{ form.time1130.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1200 }}
+                    {{ form.time1200.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1230 }}
+                    {{ form.time1230.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1300 }}
+                    {{ form.time1300.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1330 }}
+                    {{ form.time1330.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1400 }}
+                    {{ form.time1400.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1430 }}
+                    {{ form.time1430.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1500 }}
+                    {{ form.time1500.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1530 }}
+                    {{ form.time1530.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1600 }}
+                    {{ form.time1600.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1630 }}
+                    {{ form.time1630.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1700 }}
+                    {{ form.time1700.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1730 }}
+                    {{ form.time1730.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1800 }}
+                    {{ form.time1800.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1830 }}
+                    {{ form.time1830.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1900 }}
+                    {{ form.time1900.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time1930 }}
+                    {{ form.time1930.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time2000 }}
+                    {{ form.time2000.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time2030 }}
+                    {{ form.time2030.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time2100 }}
+                    {{ form.time2100.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    {{ form.time2130 }}
+                    {{ form.time2130.label }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="staffname">枠数</label>
+              {{ form.limit }}
+              {% if form.limit.errors %}
+                {% for error in form.limit.errors %}
+                  <p class="text-danger">{{ error|escape }}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">登録・更新</button>
+        </form>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">{{segment}}一覧</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table tablesorter" id="">
+            <thead class="text-primary">
+              <tr>
+                <th><a href='{% url 'booking:予約枠一覧' %}?page={{ page_no|add:"-1" }}'>＜</a>　日時　<a href='{% url 'booking:予約枠一覧' %}?page={{ page_no|add:"1" }}'>＞</a></th>
+                {% for d in day_list %}
+                <th>{{d|date:"n/j"}}</br>{{d|date:"D"}}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {# 枠数表示 #}
+              {% create_rows limit_list start as rows %}
+                {{ rows|safe }}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer text-right">
+          <a class="btn btn-info btn-sm" href="{% url 'lp:予約フォーム' %}">プレビュー</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script type="text/javascript">
+
+  // 予約枠の日付を指定する
+  $('.datetimepicker').datetimepicker({
+    format: 'YYYY-MM-DD',
+    dayViewHeaderFormat: 'YYYY年 MMM',
+    locale: 'ja',
+    icons: {
+      time: "tim-icons icon-watch-time",
+      date: "tim-icons icon-calendar-60",
+      up: "fa fa-chevron-up",
+      down: "fa fa-chevron-down",
+      previous: 'tim-icons icon-minimal-left',
+      next: 'tim-icons icon-minimal-right',
+      today: 'fa fa-screenshot',
+      clear: 'fa fa-trash',
+      close: 'fa fa-remove'
+    }
+  });
+
+
+// 予約枠の"全て"をチェックした時の制御
+$(function() {
+    $('#id_time_all').on('click', function() {
+        if ($(this).prop('checked') == true) {
+            $("input[name^='time']").prop('checked', true);
+        } else {
+            $("input[name^='time']").prop('checked', false);
+        }
+    });
+});
+</script>
+{% endblock javascripts %}

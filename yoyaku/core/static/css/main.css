@@ -1,0 +1,100 @@
+/* --------------------------------
+
+予約システム用にカスタムしたcss
+
+-------------------------------- */
+
+
+/*---------------------------------
+// Black Dashboard ローカル設定
+----------------------------------*/
+
+
+/*     textareaの修正              */
+
+textarea.form-control {
+    max-height: 320px;
+}
+
+
+/*------------------------
+	顧客登録画面のカレンダー用
+-------------------------*/
+
+/* #fullCalendar {
+    padding: 0 15px;
+} */
+
+#fullCalendar td {
+    padding: 0;
+}
+
+.fc .fc-toolbar-title {
+    color: #666666;
+    font-size: 0.9em;
+}
+
+.fc table {
+    font-size: 1em;
+}
+
+.fc-v-event .fc-event-title {
+    font-size: 10pt;
+    font-weight: bold;
+    text-align: center;
+}
+
+.fc-col-header-cell-cushion {
+    word-break: break-all;
+}
+
+.circle-color {
+    color: #3c8dbc;
+}
+
+.triangle-color {
+    color: #00a65a;
+}
+
+.cross-color {
+    color: #999999;
+}
+
+.errorlist {
+    color: red;
+}
+
+
+/*------------------------
+    予約一覧の未定義の背景色
+-------------------------*/
+
+.table>tbody>tr.table-unknown>td {
+    background-color: #e14ecb;
+}
+
+/*------------------------
+    予約登録/更新のカレンダー
+-------------------------*/
+
+.booking-calendar {
+    z-index: 0;
+    background-color: #ffffff;
+}
+.timepicker{
+    margin: auto;
+    /* display: flex; */
+}
+.bootstrap-datetimepicker-widget table td.minute > div,
+.bootstrap-datetimepicker-widget table td.hour > div {
+    z-index: 0;
+
+}
+
+.timepicker-hours, .timepicker-minutes{
+    /* z-index: 1; */
+    background-color: #ffffff;
+}
+.datepicker, .timepicker-picker{
+    /* background-color: #ffffff; */
+}

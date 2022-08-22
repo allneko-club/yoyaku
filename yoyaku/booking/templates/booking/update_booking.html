@@ -1,0 +1,51 @@
+{% extends 'layouts/base.html' %} {% block title %} {{segment}}変更 {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} 
+{% load static %}
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">{{segment}}変更</h4>
+        <h6 class="card-category">
+        {% for msg in form.non_field_errors %}
+          <span class="text-danger">{{ msg }}</span>
+        {% endfor %}
+        </h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table tablesorter" id="">
+            <thead class="text-primary">
+              <tr>
+                <th>ID</th>
+                <th>顧客名</th>
+                <th>予約日時</th>
+                <th>スタッフ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ booking.customer.id }}</td>
+                <td>{{ booking.customer.username }}</td>
+                <td>{{ booking.booking_limit.start_datetime }}</td>
+                <td>{{ booking.staff.username }}</td>
+                </td>
+              </tr>
+            </tbody> 
+          </table>
+        </div>
+        <form role="form" method="post" action="">
+          {% include 'booking/booking_form.html' %}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,50 @@
+
+    <div class="sidebar">
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="{% if '顧客' in segment %} active {% endif %}">
+            <a href="{% url 'accounts:顧客一覧' %}">
+              <i class="tim-icons icon-single-02"></i>
+              <p> 顧客管理 </p>
+            </a>
+          </li>
+          <li class="{% if '予約枠' == segment %} active {% endif %}">
+            <a href="{% url 'booking:予約枠一覧' %}">
+              <i class="tim-icons icon-calendar-60"></i>
+              <p>予約枠</p>
+            </a>
+          </li>
+          <li>
+          <li class="{% if '予約' == segment %} active {% endif %}">
+            <a href="{% url 'booking:予約一覧' %}">
+              <i class="tim-icons icon-time-alarm"></i>
+              <p>予約</p>
+            </a>
+          </li>
+          <li class="{% if 'スタッフ' in segment %} active {% endif %}">
+            <a href="{% url 'accounts:スタッフ一覧' %}">
+              <i class="tim-icons icon-single-02"></i>
+              <p>スタッフ</p>
+            </a>
+          </li>
+          <li class="{% if 'システムメール' == segment %} active {% endif %}">
+            <a href="{% url 'mail:システムメール一覧' %}">
+              <i class="tim-icons icon-email-85"></i>
+              <p>システムメール</p>
+            </a>
+          </li>
+          <li class="{% if 'メールアドレス' == segment %} active {% endif %}">
+            <a href="{% url 'mail:メールアドレス一覧' %}">
+              <i class="tim-icons icon-email-85"></i>
+              <p>メールアドレス</p>
+            </a>
+          </li>
+          <li>
+            <a href={% url 'authentication:logout' %} >
+              <i class="tim-icons icon-user-run"></i>
+              <p>ログアウト</p>
+            </a>
+          </li>          
+        </ul>
+      </div>
+    </div>

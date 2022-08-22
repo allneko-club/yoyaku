@@ -1,0 +1,58 @@
+{% extends "layouts/base-fullscreen.html" %}
+{% load static %}
+{% block title %} ログイン {% endblock title %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+
+    <form role="form" method="post" action="">
+
+      {% csrf_token %}
+
+      <div class="card card-login card-white">
+        <div class="card-header">
+          <h1 class="card-title text-black-50">Log in</h1>
+        </div>
+        <div class="card-body">
+          {% if msg %}
+            <span class="text-danger">{{ msg }}</span>
+          {% endif %}
+
+          {% for msg in form.non_field_errors %}
+            <span class="text-danger">{{ msg }}</span>
+          {% endfor %}
+
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                {{ form.username }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                {{ form.password }}
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <div class="text-center">
+            <button type="submit" name="login" class="btn btn-primary my-4">ログイン</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+{% endblock %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+ 

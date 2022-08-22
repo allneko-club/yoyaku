@@ -1,0 +1,43 @@
+
+<div class="form-row">
+  <div class="form-group col-md-8">
+    <label for="username">送信元</label>
+    {{ form.sender }}
+    {% if form.sender.errors %}
+      {% for error in form.sender.errors %}
+        <p class="text-danger">{{ error|escape }}</p>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+{# システムメール編集時は非表示、顧客に送信するメールを編集する時は表示 #}
+{% if customer %}
+<div class="form-row">
+  <div class="form-group col-md-8">
+    <label for="user_id">送信先</label>
+    {{ customer.email }}
+  </div>
+</div>
+{% endif %}
+<div class="form-row">
+  <div class="form-group col-md-8">
+    <label for="user_id">件名</label>
+    {{ form.subject }}
+    {% if form.subject.errors %}
+      {% for error in form.subject.errors %}
+        <p class="text-danger">{{ error|escape }}</p>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col-md-8">
+    <label for="password">本文</label>
+    {{ form.content }}
+    {% if form.content.errors %}
+      {% for error in form.content.errors %}
+        <p class="text-danger">{{ error|escape }}</p>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>

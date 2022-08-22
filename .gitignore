@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# original files
+staticfiles/
+media/
+performance_test/
+.idea
