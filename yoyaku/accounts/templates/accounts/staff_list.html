@@ -1,0 +1,107 @@
+{% extends 'layouts/base.html' %} {% block title %} {{segment}}一覧 {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+{% load tag_utils %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">{{segment}}一覧： {{ paginator.count }} 件</h4>
+        <div  class='text-right'>  
+          <h6>表示数</h6>
+          {% for per_page in PER_PAGE_SET %}
+            <a href='{% url 'accounts:スタッフ一覧' %}?page_size={{ per_page }}'>{{ per_page }}</a>
+          {% endfor %}
+        </div>
+        <a href="{% url 'accounts:スタッフ登録' %}" class="btn btn-primary">登録</a>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table tablesorter" id="">
+            <thead class="text-primary">
+              <tr>
+                <th>ユーザID</th>
+                <th>名前</th>
+                <th>パスワード</th>
+                <th class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for u in page_obj.object_list %}
+              <tr>
+                <td>{{ u.user_id }}</td>
+                <td>{{ u.username }}</td>
+                <td>{{ u.row_password }}</td>
+                <td class="td-actions text-right">
+                  <a rel="tooltip" class="btn btn-success btn-sm btn-icon" href="{% url 'accounts:スタッフ編集' u.id %}">
+                      <i class="tim-icons icon-settings"></i>
+                  </a>
+                  <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-icon" data-toggle="modal" data-target="#exampleModal" data-url="{% url 'accounts:スタッフ削除' u.id %}">
+                      <i class="tim-icons icon-simple-remove"></i>
+                  </button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody> 
+          </table>
+        </div>
+      </div>
+      <div class="card-footer">
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+              <li class="page-item"><a class="page-link" href='{% url 'accounts:スタッフ一覧' %}?page={{page_obj.previous_page_number}}&page_size={{paginator.per_page}}'>＜</a></li>
+            {% else %}
+              <li class="page-item disabled"><a class="page-link">＜</a></li>
+            {% endif %}
+
+            {# 現在のページ数と前後のページ数を表示 前後のページがない場合は非表示 #}
+            {% if page_obj.has_previous %}
+              <li class="page-item"><a class="page-link" href='{% url 'accounts:スタッフ一覧' %}?page={{page_obj.previous_page_number}}&page_size={{paginator.per_page}}'>{{page_obj.previous_page_number}}</a></li>
+            {% endif %}
+              <li class="page-item"><a class="page-link" href='{% url 'accounts:スタッフ一覧' %}?page={{page_obj.number}}&page_size={{paginator.per_page}}'>{{page_obj.number}}</a></li>
+            {% if page_obj.has_next %}
+              <li class="page-item"><a class="page-link" href='{% url 'accounts:スタッフ一覧' %}?page={{page_obj.next_page_number}}&page_size={{paginator.per_page}}'>{{page_obj.next_page_number}}</a></li>
+            {% endif %}
+
+            {%if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href='{% url 'accounts:スタッフ一覧' %}?page={{page_obj.next_page_number}}&page_size={{paginator.per_page}}'>＞</a></li>
+            {% else %}
+            <li class="page-item disabled"><a class="page-link">＞</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Delete Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{segment}}削除確認</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="tim-icons icon-simple-remove"></i>
+        </button>
+      </div>
+      <form role="form" id="form1" action="" method="POST">
+        {% csrf_token %}
+        <div class="modal-body">
+          指定した{{segment}}を削除します。よろしいですか？
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <button type="submit" class="btn btn-primary" id="delete">削除</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+{% endblock javascripts %}

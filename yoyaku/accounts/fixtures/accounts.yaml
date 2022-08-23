@@ -1,0 +1,64 @@
+#----------------------
+# 性別
+#----------------------
+- model: accounts.Sex
+  pk: 1
+  fields:
+    name: "男性"
+    rank: 1
+
+- model: accounts.Sex
+  pk: 2
+  fields:
+    name: "女性"
+    rank: 2
+#----------------------
+# 年代
+# ----------------------
+- model: accounts.Ages
+  pk: 1
+  fields:
+    name: "10代"
+    rank: 1
+
+- model: accounts.Ages
+  pk: 2
+  fields:
+    name: "20代"
+    rank: 2
+
+- model: accounts.Ages
+  pk: 3
+  fields:
+    name: "30代"
+    rank: 3
+
+- model: accounts.Ages
+  pk: 4
+  fields:
+    name: "40代"
+    rank: 4
+
+- model: accounts.Ages
+  pk: 5
+  fields:
+    name: "50代"
+    rank: 5
+
+- model: accounts.Ages
+  pk: 6
+  fields:
+    name: "60代"
+    rank: 6
+
+- model: accounts.Ages
+  pk: 7
+  fields:
+    name: "70代"
+    rank: 7
+
+- model: accounts.Ages
+  pk: 8
+  fields:
+    name: "80代以上"
+    rank: 8

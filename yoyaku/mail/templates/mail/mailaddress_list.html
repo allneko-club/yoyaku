@@ -1,0 +1,82 @@
+{% extends 'layouts/base.html' %} {% block title %} メールアドレス設定 {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">メールアドレス {{ object_list|length }}件</h4>
+        {% if msg %}
+        <p class="text-danger">{{ msg }}</p>
+        {% endif %}
+        {% if messages %}
+        {% for message in messages %}
+          <p class="text-danger">{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table tablesorter" id="">
+            <thead class="text-primary">
+              <tr>
+                <th style="width:40%">メールアドレス</th>
+                <th>メモ</th>
+                <th class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for e in object_list %}
+              <tr>
+                <td>{{ e.email }}</td>
+                <td>{{ e.memo|default_if_none:""|linebreaksbr }}</td>
+                <td class="td-actions text-right">
+                  <a rel="tooltip" class="btn btn-success btn-sm btn-icon" href="{% url 'mail:メールアドレス編集' e.id %}">
+                    <i class="tim-icons icon-settings"></i>
+                  </a>
+                  <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-icon" data-toggle="modal" data-target="#exampleModal" data-url="{% url 'mail:メールアドレス削除' e.id %}">
+                      <i class="tim-icons icon-simple-remove"></i>
+                  </button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody> 
+          </table>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a type="submit" class="btn btn-fill btn-primary" href="{% url 'mail:メールアドレス登録' %}">登録</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Delete Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">メールアドレス削除確認</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="tim-icons icon-simple-remove"></i>
+        </button>
+      </div>
+      <form role="form" id="form1" action="" method="POST">
+        {% csrf_token %}
+        <div class="modal-body">
+          指定したメールアドレスを削除します。よろしいですか？
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <button type="submit" class="btn btn-primary" id="delete">削除</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

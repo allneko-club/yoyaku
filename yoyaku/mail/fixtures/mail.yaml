@@ -1,0 +1,43 @@
+- model: mail.MailTag
+  pk: 1
+  fields:
+    name: "__MAILADDRESS__"
+    description: "顧客情報：メールアドレス"
+
+- model: mail.MailTag
+  pk: 2
+  fields:
+    name: "__NAME__"
+    description: "顧客情報：名前"
+
+- model: mail.MailTag
+  pk: 3
+  fields:
+    name: "__RESERVATION_DATE__"
+    description: "顧客情報：予約日時"
+
+- model: mail.MailTag
+  pk: 4
+  fields:
+    name: "__TEL__"
+    description: "顧客情報：電話番号"
+
+
+- model: mail.SystemMail
+  pk: 1
+  fields:
+    name: "顧客登録完了メール"
+    sender: null
+    subject: ""
+    content: ""
+
+
+- model: mail.SystemMail
+  pk: 2
+  fields:
+    name: "予約日時通知メール"
+    sender: null
+    subject: ""
+    content: ""
+
+    

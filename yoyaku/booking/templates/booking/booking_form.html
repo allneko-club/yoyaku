@@ -1,0 +1,51 @@
+
+{% csrf_token %} 
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="staff">スタッフ</label>
+    {% if form.staff.errors %}
+      {% for error in form.staff.errors %}
+        <p class="text-danger">{{ error|escape }}</p>
+      {% endfor %}
+    {% endif %}
+    {{ form.staff }}
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="staff">予約日時</label>
+    {% if form.start_datetime.errors %}
+      {% for error in form.start_datetime.errors %}
+        <p class="text-danger">{{ error|escape }}</p>
+      {% endfor %}
+    {% endif %}
+    {{ form.start_datetime }}
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group col-md-2">
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        {{ form.select_booking_limit }}
+        {{ form.select_booking_limit.label }}
+        <span class="form-check-sign"></span>
+      </label>
+    </div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col-md-6">
+    {% if form.booking_limit.errors %}
+      {% for error in form.booking_limit.errors %}
+        <p class="text-danger">{{ error|escape }}</p>
+      {% endfor %}
+    {% endif %}
+    {{ form.booking_limit }}
+  </div>
+</div>
+{{ form.customer }}
+<button type="submit" class="btn btn-primary">保存</button>
+
+

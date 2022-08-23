@@ -1,0 +1,52 @@
+{% extends 'layouts/base.html' %} {% block title %} {{segment}}登録 {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% load static %}
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">{{segment}}登録</h4>
+        <h6 class="card-category">
+        {% for msg in form.non_field_errors %}
+          <span class="text-danger">{{ msg }}</span>
+        {% endfor %}
+        {% if form.customer.errors %}
+          {% for error in form.customer.errors %}
+            <p class="text-danger">{{ error }}</p>
+          {% endfor %}
+        {% endif %}
+        </h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table tablesorter" id="">
+            <thead class="text-primary">
+              <tr>
+                <th>ID</th>
+                <th>顧客名</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ customer.id }}</td>
+                <td>{{ customer.username }}</td>
+                </td>
+              </tr>
+            </tbody> 
+          </table>
+        </div>
+        <form role="form" method="post" action="{% url 'booking:予約登録' customer.id %}">
+          {% include 'booking/booking_form.html' %}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

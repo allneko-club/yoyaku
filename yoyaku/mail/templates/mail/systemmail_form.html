@@ -1,0 +1,57 @@
+{% extends 'layouts/base.html' %} {% block title %} メールタグ {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">メールタグ</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table tablesorter" id="">
+            <thead class="text-primary">
+              <tr>
+                <th>タグ名</th>
+                <th>説明</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for m in mail_tags %}
+              <tr>
+                <td>{{ m.name }}</td>
+                <td>{{ m.description }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">システムメール編集</h4>
+        <h6 class="card-category">
+          <p class="h5">以下の項目を入力してください。</p>
+          {% for msg in form.non_field_errors %}
+            <span class="text-danger">{{ msg }}</span>
+          {% endfor %}
+        </h6>
+      </div>
+      <form role="form" method="post" action="{% url 'mail:システムメール編集' object.pk %}">
+        {% csrf_token %} 
+        <div class="card-body">
+          {% include 'mail/systemmail_form_body.html' %}
+          <button type="submit" class="btn btn-primary">保存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

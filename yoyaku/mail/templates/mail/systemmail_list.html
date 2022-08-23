@@ -1,0 +1,66 @@
+{% extends 'layouts/base.html' %} {% block title %} メールタグ {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">メールタグ</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table tablesorter" id="">
+            <thead class="text-primary">
+              <tr>
+                <th>タグ</th>
+                <th>説明</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for m in mail_tags %}
+              <tr>
+                <td>{{ m.name }}</td>
+                <td>{{ m.description }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {% for obj in object_list %}
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">{{obj.name}}</h4>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">送信元</h5>
+        <blockquote class="blockquote">
+          <p class="mb-0">{{obj.sender__email|default_if_none:""}}</p>
+        </blockquote>
+
+        <h5 class="card-title">件名</h5>
+          <blockquote class="blockquote">
+        <p class="mb-0">{{obj.subject|default_if_none:""}}</p>
+        </blockquote>
+
+        <h5 class="card-title">本文</h5>
+        <blockquote class="blockquote">
+          <p class="mb-0">{{obj.content|default_if_none:""|linebreaksbr}}</p>
+        </blockquote>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-fill btn-primary" href="{% url 'mail:システムメール編集' obj.id %}">編集</a>
+        <a class="btn btn-fill btn-primary" href="{% url 'mail:テストメール送信' obj.id %}">テストメール送信</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

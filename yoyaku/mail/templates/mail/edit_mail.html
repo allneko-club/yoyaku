@@ -1,0 +1,32 @@
+{% extends 'layouts/base.html' %} {% block title %} 日時通知メール確認 {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">日時通知メール確認</h4>
+        <h6 class="card-category">
+          <p class="h5">以下の内容を確認してください。</p>
+          {% for msg in form.non_field_errors %}
+            <span class="text-danger">{{ msg }}</span>
+          {% endfor %}
+        </h6>
+      </div>
+      <form role="form" method="post" action="{% url 'mail:メール編集' object.id booking.id %}">
+        {% csrf_token %} 
+        <div class="card-body">
+          {% include 'mail/systemmail_form_body.html' %}
+          <button type="submit" class="btn btn-primary">確認</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

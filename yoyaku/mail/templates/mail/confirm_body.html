@@ -1,0 +1,30 @@
+<h5 class="card-title">送信元</h5>
+<blockquote class="blockquote">
+  <p class="card-text">{{ object.sender }}</p>
+  <input type="hidden" name="sender" value="{{ object.sender }}" id="id_sender">
+</blockquote>
+
+<h5 class="card-title">送信先</h5>
+<blockquote class="blockquote">
+  {% if is_test %}
+    <p class="card-text">{{ object.sender }}</p>
+    <input type="hidden" name="to" value="{{ object.sender }}" id="id_to">
+  {% else %}
+    <p class="card-text">{{ object.to }}</p>
+    <input type="hidden" name="to" value="{{ object.to }}" id="id_to">
+  {% endif %}
+</blockquote>
+
+<h5 class="card-title mt-4">件名</h5>
+<blockquote class="blockquote">
+  <p class="card-text">{{ object.subject }}</p>
+  <input type="hidden" name="subject" value="{{ object.subject }}" id="id_subject">
+</blockquote>
+
+<h5 class="card-title mt-4">本文</h5>
+<blockquote class="blockquote">
+  <p class="card-text">{{ object.content|linebreaksbr|default_if_none:"" }}</p>
+  <input type="hidden" name="content" value="{{ object.content|default_if_none:""  }}" id="id_content">
+</blockquote>
+
+<button id='send_button' type="button" class="btn btn-primary">送信</button>
