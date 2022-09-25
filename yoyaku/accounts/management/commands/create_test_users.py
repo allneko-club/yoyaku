@@ -21,7 +21,6 @@ class Command(BaseCommand):
                 user_id=f'user{ut}{i}',
                 username=f'ユーザー{ut}{i}',
                 email=f'{ut}{i}@example.com',
-                row_password='test1234',
                 password=make_password('test1234'),
                 is_staff=is_staff,
             ) for i in range(options['count'])

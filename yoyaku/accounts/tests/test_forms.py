@@ -15,7 +15,6 @@ class TestStaffForm(TestCase):
         }
         form = StaffForm(data)
         user = form.save()
-        self.assertEqual(user.row_password, data['password1'])
         self.assertTrue(user.is_staff)
 
     def test_update(self):
@@ -39,7 +38,7 @@ class TestStaffForm(TestCase):
             'password2': '5tgbnhy6',
         })
         user = form.save()
-        self.assertIsNotNone(authenticate(user_id=user.user_id, password=user.row_password))
+        self.assertIsNotNone(authenticate(user_id=user.user_id, password='5tgbnhy6'))
 
     def test_is_required_or_not(self):
         form = StaffForm({})

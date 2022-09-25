@@ -28,7 +28,7 @@ class StaffListView(ListView):
     """
     extra_context = {'segment': 'スタッフ'}
     model = User
-    queryset = User.staffs.is_active().values('id', 'user_id', 'username', 'row_password')
+    queryset = User.staffs.is_active().values('id', 'user_id', 'username')
     ordering = '-id'
     template_name = 'accounts/staff_list.html'
 
