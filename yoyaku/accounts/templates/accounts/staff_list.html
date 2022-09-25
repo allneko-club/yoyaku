@@ -24,7 +24,6 @@
               <tr>
                 <th>ユーザID</th>
                 <th>名前</th>
-                <th>パスワード</th>
                 <th class="text-right">Actions</th>
               </tr>
             </thead>
@@ -33,7 +32,6 @@
               <tr>
                 <td>{{ u.user_id }}</td>
                 <td>{{ u.username }}</td>
-                <td>{{ u.row_password }}</td>
                 <td class="td-actions text-right">
                   <a rel="tooltip" class="btn btn-success btn-sm btn-icon" href="{% url 'accounts:スタッフ編集' u.id %}">
                       <i class="tim-icons icon-settings"></i>

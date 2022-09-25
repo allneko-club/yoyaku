@@ -67,7 +67,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         null=True,
         error_messages={'unique': '入力されたメールアドレスは既に登録済みです。'},
     )
-    row_password = models.CharField(_('row_password'), max_length=PASSWORD_MAX_LENGTH, null=True, blank=True)
     is_staff = models.BooleanField(_('スタッフの状態'), default=False)
     is_active = models.BooleanField(_('有効フラグ'), default=True)
     date_joined = models.DateTimeField(_('作成日時'), default=timezone.now)
